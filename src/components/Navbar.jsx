@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.user);
+  //const user = useSelector((state) => state.user);
+  const user = 1;
   const navigate = useNavigate();
 
   return (
@@ -14,7 +15,11 @@ const Navbar = () => {
         </Button>
         <div style={{ marginLeft: "auto" }}>
           {user ? (
-            <Button color="inherit" style={{ fontSize: 12 }}>
+            <Button
+              color="inherit"
+              style={{ fontSize: 12 }}
+              onClick={() => navigate("/AddRun")}
+            >
               Add run
             </Button>
           ) : (
@@ -31,7 +36,7 @@ const Navbar = () => {
             style={{ fontSize: 12 }}
             onClick={() => navigate("/")}
           >
-            home
+            Home
           </Button>
         </div>
       </Toolbar>

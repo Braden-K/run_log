@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../userSlice";
-import { Input, InputLabel, FormControl } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
@@ -14,12 +16,19 @@ const Login = () => {
   return (
     <div>
       <div>Login with username and password</div>
-      <FormControl>
-        <InputLabel>Username: </InputLabel>
-        <Input />
-        <InputLabel>Age: </InputLabel>
-        <Input />
-      </FormControl>
+      <form onSubmit={handleSubmit}>
+        <div>
+          Username:
+          <input type="text" onChange={(e) => setUsername(e.target.value)} />
+        </div>
+        <div>
+          Password:
+          <input type="text" onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        <button type="submit" onClick={() => navigate("/")}>
+          Login
+        </button>
+      </form>
     </div>
   );
 };

@@ -4,7 +4,8 @@ import Run from "../components/Run";
 import { useSelector } from "react-redux";
 
 const Main = () => {
-  const user = useSelector((state) => state.user);
+  //const user = useSelector((state) => state.user);
+  const user = 1;
 
   return (
     <div>
