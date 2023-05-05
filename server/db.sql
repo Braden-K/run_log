@@ -19,3 +19,4 @@ CREATE TABLE runs (
             REFERENCES users(id)
             ON DELETE CASCADE
 );
+
