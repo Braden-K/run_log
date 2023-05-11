@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   //const user = useSelector((state) => state.user);
-  const user = 1;
+  const user = null;
   const navigate = useNavigate();
 
   return (

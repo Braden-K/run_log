@@ -16,6 +16,14 @@ const getUserById = (req, res) => {
   });
 };
 
+const getUserByUsername = (req, res) => {
+  const username = req.params.username;
+  pool.query(queries.getUserByUsername, [username], (error, results) => {
+    if (error) throw error;
+    res.status(200).json(results.rows);
+  });
+};
+
 const addUser = (req, res) => {
   const { firstname, username, password } = req.body;
 
@@ -52,6 +60,7 @@ const removeUser = (req, res) => {
 module.exports = {
   getUsers,
   getUserById,
+  getUserByUsername,
   addUser,
   removeUser,
 };

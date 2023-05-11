@@ -1,35 +1,39 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../userSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup
+  .object({
+    username: yup.string().required(),
+    password: yup.string().required(),
+  })
+  .required();
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const handleSubmit = () => {
-    dispatch(login("name"));
+  const onSubmit = (data) => {
+    // TODO: fetch user by username from db and take firstname and id and store in store for current user state
   };
 
   return (
-    <div>
-      <div>Login with username and password</div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          Username:
-          <input type="text" onChange={(e) => setUsername(e.target.value)} />
-        </div>
-        <div>
-          Password:
-          <input type="text" onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button type="submit" onClick={() => navigate("/")}>
-          Login
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>Username</div>
+      <input {...register("username")} />
+      <p>{errors.username?.message}</p>
+
+      <div>Password</div>
+      <input {...register("password")} />
+      <p>{errors.password?.message}</p>
+
+      <input type="submit" />
+    </form>
   );
 };
 

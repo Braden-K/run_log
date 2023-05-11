@@ -1,11 +1,11 @@
 import Stack from "@mui/joy/Stack";
-import { Box, Container, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Run from "../components/Run";
 import { useSelector } from "react-redux";
 
 const Main = () => {
   //const user = useSelector((state) => state.user);
-  const user = 1;
+  const user = null;
 
   return (
     <div>
