@@ -1,14 +1,16 @@
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../userSlice";
 
 const Navbar = () => {
-  //const user = useSelector((state) => state.user);
-  const user = null;
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
-    <AppBar color="inherit" position="static">
+    <AppBar sx={{ backgroundColor: "primary.main" }} position="static">
       <Toolbar>
         <Button color="inherit">
           <Typography variant="h6">Run Log</Typography>
@@ -37,6 +39,13 @@ const Navbar = () => {
             onClick={() => navigate("/")}
           >
             Home
+          </Button>
+          <Button
+            color="inherit"
+            style={{ fontSize: 12 }}
+            onClick={() => dispatch(logout())}
+          >
+            Logout
           </Button>
         </div>
       </Toolbar>

@@ -1,3 +1,4 @@
+const { ConstructionOutlined } = require("@mui/icons-material");
 const pool = require("../db.js");
 const queries = require("../runQueries.js");
 
@@ -18,13 +19,21 @@ const addRun = (req, res) => {
     [distance, sec_per_mile, avg_hr, user_id],
     (error, results) => {
       if (error) throw error;
-      res.status(201).send("Run created");
       console.log("Run created");
     }
   );
 };
 
+const deleteRunById = (req, res) => {
+  const id = req.params.id;
+  pool.query(queries.deleteRunById, [id], (error, results) => {
+    if (error) throw error;
+    console.log("Run deleted");
+  });
+};
+
 module.exports = {
   getRunByUserId,
   addRun,
+  deleteRunById,
 };

@@ -11,16 +11,11 @@ const getUsers = (req, res) => {
 const getUserById = (req, res) => {
   const id = parseInt(req.params.id);
   pool.query(queries.getUserById, [id], (error, results) => {
-    if (error) throw error;
-    res.status(200).json(results.rows);
-  });
-};
-
-const getUserByUsername = (req, res) => {
-  const username = req.params.username;
-  pool.query(queries.getUserByUsername, [username], (error, results) => {
-    if (error) throw error;
-    res.status(200).json(results.rows);
+    if (error) {
+      console.log(error);
+    } else {
+      res.status(200).json(results.rows);
+    }
   });
 };
 
@@ -28,7 +23,7 @@ const addUser = (req, res) => {
   const { firstname, username, password } = req.body;
 
   pool.query(queries.checkUsernameExists, [username], (error, results) => {
-    if (results.rows.length) {
+    if (results?.rows.length) {
       res.send("Username already exists");
     }
 
@@ -60,7 +55,6 @@ const removeUser = (req, res) => {
 module.exports = {
   getUsers,
   getUserById,
-  getUserByUsername,
   addUser,
   removeUser,
 };
