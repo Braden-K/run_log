@@ -15,6 +15,8 @@ const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  console.log("gitttt");
+
   useEffect(() => {
     async function fetchData() {
       await fetch(`http://localhost:5000/api/v1/runs/${user?.userId}`, {
